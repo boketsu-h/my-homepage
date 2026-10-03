@@ -256,3 +256,10 @@ body {
   max-width: 100%;
   overflow-x: hidden;
 }
+
+/* ===== ブログ記事の横幅 ===== */
+
+.post {
+  max-width: 760px;
+  margin: 0 auto;
+}
