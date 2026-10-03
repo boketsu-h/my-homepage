@@ -1,20 +1,82 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <title>ぼけつのホームページ</title>
+
+  <style>
+    /* 普段表示されている画像 */
+    .gallery-image {
+      width: 400px;
+      max-width: 100%;
+      cursor: pointer;
+    }
+
+    /* 拡大表示するときの黒い背景 */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+
+      justify-content: center;
+      align-items: center;
+
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    /* 拡大された画像 */
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+  </style>
 </head>
 
+
 <body>
+
   <h1>ぼけつのホームページ</h1>
   <p>ホームページ作りました。</p>
 
   <h2>イラスト</h2>
 
-  <a href="kumo.png" target="_blank">
-  <img src="kumo.png" width="400">
-</a>
+  <!-- 普段表示される画像 -->
+  <img
+    src="kumo.png"
+    class="gallery-image"
+    onclick="openLightbox()"
+    alt="イラスト"
+  >
 
   <p>最初のイラストです。</p>
+
+
+  <!-- 拡大表示 -->
+  <div
+    id="lightbox"
+    class="lightbox"
+    onclick="closeLightbox()"
+  >
+    <img src="kumo.png" alt="拡大画像">
+  </div>
+
+
+  <script>
+    function openLightbox() {
+      document.getElementById("lightbox").style.display = "flex";
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+  </script>
+
 </body>
 </html>
