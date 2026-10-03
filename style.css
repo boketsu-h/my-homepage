@@ -244,8 +244,15 @@ p {
   margin: 30px auto;
 }
 
-
+/* 画像が画面からはみ出さないようにする */
 img {
   max-width: 100% !important;
   height: auto !important;
+}
+
+/* 横スクロール防止 */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
