@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gallery | ぼけつのホームページ</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+  <!-- ===== 上部メニュー ===== -->
+
+  <header>
+    <div class="header-inner">
+
+      <a href="index.html" class="logo">
+        BOKETSU
+      </a>
+
+      <nav>
+        <a href="index.html">HOME</a>
+        <a href="gallery.html">GALLERY</a>
+        <a href="blog.html">BLOG</a>
+        <a href="about.html">ABOUT</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <!-- ===== メイン部分 ===== -->
+
+  <main>
+
+    <h1>GALLERY</h1>
+
+    <p>
+      描いたイラストを置いています。
+    </p>
+
+
+    <!-- ===== 作品 ===== -->
+
+    <div class="gallery">
+
+      <div class="gallery-item">
+
+        <img
+          src="kumo.png"
+          class="gallery-image"
+          onclick="openLightbox('kumo.png')"
+          alt="イラスト"
+        >
+
+        <p>kumo</p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- ===== 拡大表示 ===== -->
+
+  <div
+    id="lightbox"
+    class="lightbox"
+    onclick="closeLightbox()"
+  >
+
+    <img
+      id="lightbox-image"
+      src=""
+      alt="拡大画像"
+    >
+
+  </div>
+
+
+  <!-- ===== JavaScript ===== -->
+
+  <script>
+
+    function openLightbox(imageSrc) {
+      document.getElementById("lightbox-image").src = imageSrc;
+      document.getElementById("lightbox").style.display = "flex";
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+
+  </script>
+
+</body>
+
+</html>
