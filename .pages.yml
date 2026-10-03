@@ -6,7 +6,18 @@ media:
     categories: [image]
     rename: safe
 
+  - name: gallery_images
+    label: ギャラリー画像
+    input: images/gallery
+    output: /my-homepage/images/gallery
+    categories: [image]
+    rename: safe
+
+
 content:
+
+  # ===== ブログ =====
+
   - name: posts
     label: ブログ
     type: collection
@@ -46,3 +57,43 @@ content:
           media: blog_images
           rename: safe
           switcher: true
+
+
+  # ===== ギャラリー =====
+
+  - name: gallery
+    label: ギャラリー
+    type: collection
+    path: _gallery
+
+    filename: "{primary}.md"
+
+    view:
+      primary: title
+      fields: [title, date]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+
+    fields:
+      - name: title
+        label: タイトル
+        type: string
+        required: true
+
+      - name: date
+        label: 投稿日
+        type: date
+        required: true
+
+      - name: image
+        label: 画像
+        type: image
+        required: true
+        options:
+          media: gallery_images
+
+      - name: description
+        label: コメント
+        type: text
