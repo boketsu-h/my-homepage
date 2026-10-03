@@ -1,6 +1,10 @@
 media:
-  input: images/uploads
-  output: /my-homepage/images/uploads
+  - name: blog_images
+    label: ブログ画像
+    input: images/uploads
+    output: /my-homepage/images/uploads
+    categories: [image]
+    rename: safe
 
 content:
   - name: posts
@@ -37,3 +41,8 @@ content:
       - name: body
         label: 本文
         type: rich-text
+        options:
+          format: markdown
+          media: blog_images
+          rename: safe
+          switcher: true
