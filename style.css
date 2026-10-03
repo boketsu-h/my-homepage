@@ -193,3 +193,43 @@ p {
   }
 
 }
+
+
+/* ===== ブログ ===== */
+
+.blog-list {
+  margin-top: 40px;
+}
+
+.blog-item {
+  padding: 25px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.blog-date {
+  margin: 0;
+  color: var(--subtext);
+  font-size: 13px;
+}
+
+.blog-item h2 {
+  margin: 5px 0 10px;
+  font-size: 20px;
+}
+
+.blog-item h2 a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.blog-item h2 a:hover {
+  color: var(--accent);
+}
+
+.blog-item p {
+  margin-bottom: 0;
+}
