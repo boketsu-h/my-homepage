@@ -1,0 +1,26 @@
+media:
+  input: images/uploads
+  output: /my-homepage/images/uploads
+
+content:
+  - name: posts
+    label: ブログ
+    type: collection
+    path: posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
+    fields:
+      - name: title
+        label: タイトル
+        type: string
+        required: true
+
+      - name: date
+        label: 投稿日
+        type: date
+        required: true
+
+      - name: body
+        label: 本文
+        type: rich-text
