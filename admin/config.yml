@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: boketsu-h/my-homepage
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/my-homepage/images/uploads"
+
+locale: "ja"
+
+collections:
+  - name: "blog"
+    label: "ブログ"
+    folder: "posts"
+    create: true
+
+    fields:
+      - label: "タイトル"
+        name: "title"
+        widget: "string"
+
+      - label: "投稿日"
+        name: "date"
+        widget: "datetime"
+
+      - label: "本文"
+        name: "body"
+        widget: "markdown"
