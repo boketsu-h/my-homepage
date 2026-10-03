@@ -7,9 +7,11 @@ content:
     label: ブログ
     type: collection
     path: posts
-    filename: "{year}-{month}-{day}-{primary}.md"
+    filename: "{year}-{month}-{day}-{title}.md"
+
     view:
       fields: [title, date]
+
     fields:
       - name: title
         label: タイトル
