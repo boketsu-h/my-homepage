@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+<main>
+
+  <article class="post">
+
+    <p class="blog-date">
+      {{ page.date | date: "%Y.%m.%d" }}
+    </p>
+
+    <h1>
+      {{ page.title }}
+    </h1>
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+
+    <p class="post-back">
+      <a href="{{ '/blog.html' | relative_url }}">
+        ← BLOGに戻る
+      </a>
+    </p>
+
+  </article>
+
+</main>
