@@ -65,8 +65,11 @@ content:
     label: ギャラリー
     type: collection
     path: _gallery
+    format: yaml-frontmatter
 
-    filename: "{year}-{month}-{day}-{primary}.md"
+    filename:
+      template: "{year}-{month}-{day}-{primary}.md"
+      field: create
 
     view:
       primary: title
