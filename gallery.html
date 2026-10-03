@@ -1,103 +1,63 @@
-<!DOCTYPE html>
-<html lang="ja">
+---
+layout: default
+title: Gallery
+---
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<main>
 
-  <title>Gallery | ぼけつのホームページ</title>
+  <h1>GALLERY</h1>
 
-  <link rel="stylesheet" href="style.css">
-</head>
+  <p>描いたものなど。</p>
 
+  <div class="gallery">
 
-<body>
+    {% assign works = site.gallery | sort: "date" | reverse %}
 
-  <!-- ===== 上部メニュー ===== -->
+    {% for work in works %}
 
-  <header>
-    <div class="header-inner">
-
-      <a href="index.html" class="logo">
-        BOKETSU
-      </a>
-
-      <nav>
-        <a href="index.html">HOME</a>
-        <a href="gallery.html">GALLERY</a>
-        <a href="blog.html">BLOG</a>
-        <a href="about.html">ABOUT</a>
-      </nav>
-
-    </div>
-  </header>
-
-
-  <!-- ===== メイン部分 ===== -->
-
-  <main>
-
-    <h1>GALLERY</h1>
-
-    <p>
-      描いたイラストを置いています。
-    </p>
-
-
-    <!-- ===== 作品 ===== -->
-
-    <div class="gallery">
-
-      <div class="gallery-item">
+      <article class="gallery-item">
 
         <img
-          src="kumo.png"
-          class="gallery-image"
-          onclick="openLightbox('kumo.png')"
-          alt="イラスト"
+          src="{{ work.image }}"
+          alt="{{ work.title | escape }}"
+          loading="lazy"
+          onclick="openLightbox(this.src, this.alt)"
         >
 
-        <p>kumo</p>
+        <h2>{{ work.title }}</h2>
 
-      </div>
+        {% if work.description %}
+          <p>{{ work.description }}</p>
+        {% endif %}
 
-    </div>
+      </article>
 
-  </main>
-
-
-  <!-- ===== 拡大表示 ===== -->
-
-  <div
-    id="lightbox"
-    class="lightbox"
-    onclick="closeLightbox()"
-  >
-
-    <img
-      id="lightbox-image"
-      src=""
-      alt="拡大画像"
-    >
+    {% endfor %}
 
   </div>
 
+</main>
 
-  <!-- ===== JavaScript ===== -->
 
-  <script>
+<!-- ===== 画像拡大表示 ===== -->
 
-    function openLightbox(imageSrc) {
-      document.getElementById("lightbox-image").src = imageSrc;
-      document.getElementById("lightbox").style.display = "flex";
-    }
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-image" src="" alt="">
+</div>
 
-    function closeLightbox() {
-      document.getElementById("lightbox").style.display = "none";
-    }
 
-  </script>
+<script>
+  function openLightbox(src, alt) {
+    const lightbox = document.getElementById("lightbox");
+    const image = document.getElementById("lightbox-image");
 
-</body>
+    image.src = src;
+    image.alt = alt;
 
-</html>
+    lightbox.style.display = "flex";
+  }
+
+  function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+  }
+</script>
