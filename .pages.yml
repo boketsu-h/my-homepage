@@ -6,7 +6,7 @@ content:
   - name: posts
     label: ブログ
     type: collection
-    path: posts
+    path: _posts
     filename: "{year}-{month}-{day}-{title}.md"
 
     view:
@@ -23,6 +23,12 @@ content:
         type: date
         required: true
 
+      - name: layout
+        type: string
+        hidden: true
+        default: post
+
       - name: body
         label: 本文
         type: rich-text
+        
