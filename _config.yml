@@ -3,3 +3,7 @@ title: ぼけつのホームページ
 timezone: Asia/Tokyo
 
 future: true
+
+collections:
+  gallery:
+    output: false
