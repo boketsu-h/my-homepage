@@ -30,12 +30,18 @@ body {
 /* ===== 上部メニュー ===== */
 
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 100;
 
   background: rgba(255, 255, 255, 0.95);
   border-bottom: 1px solid var(--border);
+}
+
+body {
+  padding-top: 70px;
 }
 
 .header-inner {
@@ -160,6 +166,10 @@ p {
   main {
     padding: 35px 20px 70px;
   }
+
+  body {
+  padding-top: 60px;
+}
 }
 
 
