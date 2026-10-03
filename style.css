@@ -161,3 +161,35 @@ p {
     padding: 35px 20px 70px;
   }
 }
+
+
+/* ===== ギャラリー ===== */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.gallery-item img {
+  width: 100%;
+}
+
+.gallery-item p {
+  margin-top: 8px;
+  color: var(--subtext);
+  font-size: 13px;
+}
+
+
+/* スマホでは2列 */
+
+@media (max-width: 600px) {
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+}
