@@ -86,9 +86,13 @@ content:
         required: true
 
       - name: date
-        label: 投稿日
+        label: 投稿日時
         type: date
         required: true
+        options:
+          time: true
+          format: "yyyy-MM-dd'T'HH:mm:ss"
+          step: 1
 
       - name: image
         label: 画像
