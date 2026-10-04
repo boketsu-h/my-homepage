@@ -290,3 +290,106 @@ body {
   max-width: 760px;
   margin: 0 auto;
 }
+
+/* =========================
+   GALLERY 操作部分
+========================= */
+
+.gallery-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin: 35px 0 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
+}
+
+
+/* 並び順 */
+
+.gallery-sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gallery-sort label {
+  color: var(--subtext);
+  font-size: 13px;
+}
+
+.gallery-sort select {
+  padding: 7px 32px 7px 12px;
+
+  background: #ffffff;
+  color: var(--text);
+
+  border: 1px solid var(--border);
+  border-radius: 4px;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.gallery-sort select:focus {
+  outline: 1px solid var(--accent);
+}
+
+
+/* タグ */
+
+.gallery-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.gallery-filters button {
+  padding: 6px 13px;
+
+  background: transparent;
+  color: var(--subtext);
+
+  border: 1px solid var(--border);
+  border-radius: 4px;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.gallery-filters button:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.gallery-filters button.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+
+/* スマホ */
+
+@media (max-width: 600px) {
+
+  .gallery-controls {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .gallery-filters {
+    flex-wrap: wrap;
+  }
+
+}
