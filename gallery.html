@@ -17,12 +17,14 @@ title: Gallery
 
       <article class="gallery-item">
 
-        <img
-          src="{{ work.image }}"
-          alt="{{ work.title | escape }}"
-          loading="lazy"
-          onclick="openLightbox(this.src, this.alt)"
-        >
+       <div class="gallery-image-frame">
+  <img
+    src="{{ work.image }}"
+    alt="{{ work.title | escape }}"
+    loading="lazy"
+    onclick="openLightbox(this.src, this.alt)"
+  >
+</div>
 
         <h2>{{ work.title }}</h2>
 
