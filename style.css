@@ -182,8 +182,25 @@ p {
   margin-top: 40px;
 }
 
-.gallery-item img {
+/* ギャラリー画像の展示領域 */
+.gallery-image-frame {
   width: 100%;
+  aspect-ratio: 1 / 1.414;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* 展示領域の中の画像 */
+.gallery-image-frame img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
 }
 
 .gallery-item p {
