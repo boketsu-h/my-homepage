@@ -1,98 +1,58 @@
-<!DOCTYPE html>
-<html lang="ja">
+---
+layout: default
+title: Home
+---
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<section class="home-hero">
 
-  <title>ぼけつのホームページ</title>
+  <!-- 装飾 -->
+  <div class="hero-decoration hero-circle"></div>
+  <div class="hero-decoration hero-line"></div>
+  <div class="hero-decoration hero-square"></div>
+  <div class="hero-decoration hero-small-circle"></div>
 
-  <!-- 共通デザイン -->
-  <link rel="stylesheet" href="style.css">
-</head>
-
-
-<body>
-
-  <!-- ===== 上部メニュー ===== -->
-
-  <header>
-    <div class="header-inner">
-
-      <a href="index.html" class="logo">
-        BOKETSU
-      </a>
-
-      <nav>
-        <a href="index.html">HOME</a>
-        <a href="gallery.html">GALLERY</a>
-        <a href="blog.html">BLOG</a>
-        <a href="about.html">ABOUT</a>
-      </nav>
-
-    </div>
-  </header>
-
-
-  <!-- ===== メイン部分 ===== -->
-
-  <main>
-
-    <h1>ぼけつのホームページ</h1>
-
-    <p>
-      絵を描いたり、趣味のことを書いたりする個人サイトです。
-    </p>
-
-
-    <h2>ILLUSTRATION</h2>
-
+  <!-- キャラクター -->
+  <div class="hero-character-area">
     <img
-      src="kumo.png"
-      class="gallery-image"
-      onclick="openLightbox()"
-      alt="イラスト"
+      src="{{ '/midori.webp' | relative_url }}"
+      alt=""
+      class="hero-character"
     >
-
-    <p>
-      最近描いたもの。
-    </p>
-
-
-    <h2>RECENT POSTS</h2>
-
-    <p>
-      ここに最近のブログ記事が表示される予定です。
-    </p>
-
-  </main>
-
-
-  <!-- ===== 画像拡大 ===== -->
-
-  <div
-    id="lightbox"
-    class="lightbox"
-    onclick="closeLightbox()"
-  >
-    <img src="kumo.png" alt="拡大画像">
   </div>
 
+  <!-- 小さなデザイン文字 -->
+  <div class="hero-text">
+    <span>BOKETSU</span>
+    <span>PERSONAL WEBSITE</span>
+  </div>
 
-  <!-- ===== JavaScript ===== -->
+  <!-- 下に続くことを示す -->
+  <a href="#home-links" class="hero-scroll">
+    SCROLL
+    <span>↓</span>
+  </a>
 
-  <script>
+</section>
 
-    function openLightbox() {
-      document.getElementById("lightbox").style.display = "flex";
-    }
 
-    function closeLightbox() {
-      document.getElementById("lightbox").style.display = "none";
-    }
+<section id="home-links" class="home-links">
 
-  </script>
+  <a href="{{ '/gallery.html' | relative_url }}">
+    <span>01</span>
+    <strong>GALLERY</strong>
+    <small>Illustrations</small>
+  </a>
 
-</body>
+  <a href="{{ '/blog.html' | relative_url }}">
+    <span>02</span>
+    <strong>BLOG</strong>
+    <small>Notes & Diary</small>
+  </a>
 
-</html>
+  <a href="{{ '/about.html' | relative_url }}">
+    <span>03</span>
+    <strong>ABOUT</strong>
+    <small>About Me</small>
+  </a>
+
+</section>
