@@ -100,3 +100,18 @@ content:
       - name: description
         label: コメント
         type: text
+
+              - name: category
+        label: タグ
+        type: select
+        required: true
+        options:
+          values:
+            - オリジナル
+            - 二次創作
+
+      - name: featured
+        label: おすすめ作品
+        type: boolean
+        default: false
+
