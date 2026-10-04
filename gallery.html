@@ -1,3 +1,93 @@
+---
+layout: default
+title: Gallery
+---
+
+<main>
+
+  <h1>GALLERY</h1>
+
+  <p>描いたものなど。</p>
+
+  <!-- 並び替え・絞り込み -->
+  <div class="gallery-controls">
+
+    <div class="gallery-sort">
+      <label for="gallery-sort">並び順</label>
+
+      <select id="gallery-sort">
+        <option value="newest">新しい順</option>
+        <option value="oldest">古い順</option>
+      </select>
+    </div>
+
+    <div class="gallery-filters">
+
+      <button type="button" class="active" data-filter="all">
+        ALL
+      </button>
+
+      <button type="button" data-filter="オリジナル">
+        オリジナル
+      </button>
+
+      <button type="button" data-filter="二次創作">
+        二次創作
+      </button>
+
+      <button type="button" data-filter="featured">
+        おすすめ
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ギャラリー -->
+  <div class="gallery" id="gallery">
+
+    {% assign works = site.gallery | sort: "date" | reverse %}
+
+    {% for work in works %}
+
+      <article
+        class="gallery-item"
+        data-category="{{ work.category }}"
+        data-featured="{% if work.featured %}1{% else %}0{% endif %}"
+        data-date="{{ work.date | date: '%s' }}"
+      >
+
+        <div class="gallery-image-frame">
+          <img
+            src="{{ work.image }}"
+            alt="{{ work.title | escape }}"
+            loading="lazy"
+            onclick="openLightbox(this.src, this.alt)"
+          >
+        </div>
+
+        <h2>{{ work.title }}</h2>
+
+        {% if work.description %}
+          <p>{{ work.description }}</p>
+        {% endif %}
+
+      </article>
+
+    {% endfor %}
+
+  </div>
+
+</main>
+
+
+<!-- 画像拡大 -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-image" src="" alt="">
+</div>
+
+
 <script>
 
   const gallery = document.getElementById("gallery");
@@ -8,8 +98,7 @@
 
 
   /* =========================
-     ギャラリーを更新
-     絞り込み＋並び替えを同時に行う
+     ギャラリー更新
   ========================= */
 
   function updateGallery() {
@@ -28,33 +117,13 @@
       const dateA = Number(a.dataset.date);
       const dateB = Number(b.dataset.date);
 
-      const featuredA = Number(a.dataset.featured);
-      const featuredB = Number(b.dataset.featured);
-
-
-      // おすすめ順
-      if (sortType === "featured") {
-
-        if (featuredA !== featuredB) {
-          return featuredB - featuredA;
-        }
-
-        // おすすめ状態が同じなら新しい順
-        return dateB - dateA;
-      }
-
-
-      // 新しい順
       if (sortType === "newest") {
         return dateB - dateA;
       }
 
-
-      // 古い順
       if (sortType === "oldest") {
         return dateA - dateB;
       }
-
 
       return 0;
 
@@ -68,20 +137,35 @@
     });
 
 
-    /* ----- タグで絞り込み ----- */
+    /* ----- 絞り込み ----- */
 
     items.forEach(item => {
 
       const category = item.dataset.category;
+      const featured = item.dataset.featured;
 
-      if (
-        currentFilter === "all" ||
-        category === currentFilter
-      ) {
-        item.hidden = false;
-      } else {
-        item.hidden = true;
+      let show = false;
+
+
+      // すべて
+      if (currentFilter === "all") {
+        show = true;
       }
+
+
+      // おすすめ作品
+      else if (currentFilter === "featured") {
+        show = featured === "1";
+      }
+
+
+      // オリジナル・二次創作
+      else {
+        show = category === currentFilter;
+      }
+
+
+      item.hidden = !show;
 
     });
 
@@ -89,7 +173,7 @@
 
 
   /* =========================
-     並び順を変更
+     並び順変更
   ========================= */
 
   sortSelect.addEventListener("change", () => {
@@ -98,7 +182,7 @@
 
 
   /* =========================
-     タグを変更
+     絞り込みボタン
   ========================= */
 
   filterButtons.forEach(button => {
