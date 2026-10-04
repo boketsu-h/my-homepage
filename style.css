@@ -728,3 +728,90 @@ body {
   }
 
 }
+
+/* =========================
+   HOME HERO 微調整
+========================= */
+
+/* キャラクターを少しだけ大きく */
+.hero-character-area {
+  width: min(52vw, 700px);
+}
+
+
+/* 円をキャラクター側へ寄せる */
+.hero-circle {
+  width: 260px;
+  height: 260px;
+
+  left: 16%;
+  top: 14%;
+
+  opacity: 0.30;
+}
+
+
+/* 線も中央寄りに */
+.hero-line {
+  width: 23vw;
+
+  right: 12%;
+  top: 29%;
+
+  opacity: 0.40;
+}
+
+
+/* 四角を少し小さく */
+.hero-square {
+  width: 90px;
+  height: 90px;
+
+  right: 13%;
+  bottom: 14%;
+
+  opacity: 0.28;
+}
+
+
+/* 小さい丸 */
+.hero-small-circle {
+  left: 18%;
+  bottom: 22%;
+
+  width: 11px;
+  height: 11px;
+}
+
+
+/* スマホは別調整 */
+@media (max-width: 600px) {
+
+  .hero-character-area {
+    width: min(92vw, 540px);
+  }
+
+  .hero-circle {
+    width: 150px;
+    height: 150px;
+
+    left: -30px;
+    top: 14%;
+  }
+
+  .hero-line {
+    width: 32vw;
+
+    right: 3%;
+    top: 20%;
+  }
+
+  .hero-square {
+    width: 60px;
+    height: 60px;
+
+    right: 8%;
+    bottom: 18%;
+  }
+
+}
