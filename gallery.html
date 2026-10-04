@@ -9,22 +9,58 @@ title: Gallery
 
   <p>描いたものなど。</p>
 
-  <div class="gallery">
+  <!-- 並び替え・絞り込み -->
+  <div class="gallery-controls">
+
+    <div class="gallery-sort">
+      <label for="gallery-sort">並び順</label>
+
+      <select id="gallery-sort">
+        <option value="featured">おすすめ順</option>
+        <option value="newest">新しい順</option>
+        <option value="oldest">古い順</option>
+      </select>
+    </div>
+
+    <div class="gallery-filters">
+      <button type="button" class="active" data-filter="all">
+        ALL
+      </button>
+
+      <button type="button" data-filter="オリジナル">
+        オリジナル
+      </button>
+
+      <button type="button" data-filter="二次創作">
+        二次創作
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- ギャラリー -->
+  <div class="gallery" id="gallery">
 
     {% assign works = site.gallery | sort: "date" | reverse %}
 
     {% for work in works %}
 
-      <article class="gallery-item">
+      <article
+        class="gallery-item"
+        data-category="{{ work.category }}"
+        data-featured="{% if work.featured %}1{% else %}0{% endif %}"
+        data-date="{{ work.date | date: '%s' }}"
+      >
 
-       <div class="gallery-image-frame">
-  <img
-    src="{{ work.image }}"
-    alt="{{ work.title | escape }}"
-    loading="lazy"
-    onclick="openLightbox(this.src, this.alt)"
-  >
-</div>
+        <div class="gallery-image-frame">
+          <img
+            src="{{ work.image }}"
+            alt="{{ work.title | escape }}"
+            loading="lazy"
+            onclick="openLightbox(this.src, this.alt)"
+          >
+        </div>
 
         <h2>{{ work.title }}</h2>
 
@@ -41,15 +77,146 @@ title: Gallery
 </main>
 
 
-<!-- ===== 画像拡大表示 ===== -->
-
+<!-- 画像拡大 -->
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
   <img id="lightbox-image" src="" alt="">
 </div>
 
 
 <script>
+
+  const gallery = document.getElementById("gallery");
+  const sortSelect = document.getElementById("gallery-sort");
+  const filterButtons = document.querySelectorAll(".gallery-filters button");
+
+  let currentFilter = "all";
+
+
+  /* =========================
+     並び替え
+  ========================= */
+
+  function sortGallery() {
+
+    const items = Array.from(
+      gallery.querySelectorAll(".gallery-item")
+    );
+
+    const sortType = sortSelect.value;
+
+    items.sort((a, b) => {
+
+      const dateA = Number(a.dataset.date);
+      const dateB = Number(b.dataset.date);
+
+      const featuredA = Number(a.dataset.featured);
+      const featuredB = Number(b.dataset.featured);
+
+
+      // おすすめ順
+      if (sortType === "featured") {
+
+        if (featuredA !== featuredB) {
+          return featuredB - featuredA;
+        }
+
+        return dateB - dateA;
+      }
+
+
+      // 新しい順
+      if (sortType === "newest") {
+        return dateB - dateA;
+      }
+
+
+      // 古い順
+      if (sortType === "oldest") {
+        return dateA - dateB;
+      }
+
+      return 0;
+
+    });
+
+
+    items.forEach(item => {
+      gallery.appendChild(item);
+    });
+
+  }
+
+
+  /* =========================
+     タグ絞り込み
+  ========================= */
+
+  function filterGallery() {
+
+    const items = gallery.querySelectorAll(".gallery-item");
+
+    items.forEach(item => {
+
+      if (
+        currentFilter === "all" ||
+        item.dataset.category === currentFilter
+      ) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+
+    });
+
+  }
+
+
+  /* =========================
+     並び順変更
+  ========================= */
+
+  sortSelect.addEventListener("change", () => {
+    sortGallery();
+  });
+
+
+  /* =========================
+     タグボタン
+  ========================= */
+
+  filterButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      currentFilter = button.dataset.filter;
+
+      filterButtons.forEach(btn => {
+        btn.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      filterGallery();
+
+    });
+
+  });
+
+
+  /* =========================
+     最初の表示
+  ========================= */
+
+  sortGallery();
+  filterGallery();
+
+
+  /* =========================
+     画像拡大
+  ========================= */
+
   function openLightbox(src, alt) {
+
     const lightbox = document.getElementById("lightbox");
     const image = document.getElementById("lightbox-image");
 
@@ -57,9 +224,12 @@ title: Gallery
     image.alt = alt;
 
     lightbox.style.display = "flex";
+
   }
+
 
   function closeLightbox() {
     document.getElementById("lightbox").style.display = "none";
   }
+
 </script>
