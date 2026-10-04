@@ -1,88 +1,3 @@
----
-layout: default
-title: Gallery
----
-
-<main>
-
-  <h1>GALLERY</h1>
-
-  <p>描いたものなど。</p>
-
-  <!-- 並び替え・絞り込み -->
-  <div class="gallery-controls">
-
-    <div class="gallery-sort">
-      <label for="gallery-sort">並び順</label>
-
-      <select id="gallery-sort">
-        <option value="featured">おすすめ順</option>
-        <option value="newest">新しい順</option>
-        <option value="oldest">古い順</option>
-      </select>
-    </div>
-
-    <div class="gallery-filters">
-      <button type="button" class="active" data-filter="all">
-        ALL
-      </button>
-
-      <button type="button" data-filter="オリジナル">
-        オリジナル
-      </button>
-
-      <button type="button" data-filter="二次創作">
-        二次創作
-      </button>
-    </div>
-
-  </div>
-
-
-  <!-- ギャラリー -->
-  <div class="gallery" id="gallery">
-
-    {% assign works = site.gallery | sort: "date" | reverse %}
-
-    {% for work in works %}
-
-      <article
-        class="gallery-item"
-        data-category="{{ work.category }}"
-        data-featured="{% if work.featured %}1{% else %}0{% endif %}"
-        data-date="{{ work.date | date: '%s' }}"
-      >
-
-        <div class="gallery-image-frame">
-          <img
-            src="{{ work.image }}"
-            alt="{{ work.title | escape }}"
-            loading="lazy"
-            onclick="openLightbox(this.src, this.alt)"
-          >
-        </div>
-
-        <h2>{{ work.title }}</h2>
-
-        {% if work.description %}
-          <p>{{ work.description }}</p>
-        {% endif %}
-
-      </article>
-
-    {% endfor %}
-
-  </div>
-
-</main>
-
-
-<!-- 画像拡大 -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-image" src="" alt="">
-</div>
-
-
 <script>
 
   const gallery = document.getElementById("gallery");
@@ -93,16 +8,20 @@ title: Gallery
 
 
   /* =========================
-     並び替え
+     ギャラリーを更新
+     絞り込み＋並び替えを同時に行う
   ========================= */
 
-  function sortGallery() {
+  function updateGallery() {
 
     const items = Array.from(
       gallery.querySelectorAll(".gallery-item")
     );
 
     const sortType = sortSelect.value;
+
+
+    /* ----- 並び替え ----- */
 
     items.sort((a, b) => {
 
@@ -120,6 +39,7 @@ title: Gallery
           return featuredB - featuredA;
         }
 
+        // おすすめ状態が同じなら新しい順
         return dateB - dateA;
       }
 
@@ -135,35 +55,32 @@ title: Gallery
         return dateA - dateB;
       }
 
+
       return 0;
 
     });
 
 
+    /* ----- 並び替えた順番で再配置 ----- */
+
     items.forEach(item => {
       gallery.appendChild(item);
     });
 
-  }
 
-
-  /* =========================
-     タグ絞り込み
-  ========================= */
-
-  function filterGallery() {
-
-    const items = gallery.querySelectorAll(".gallery-item");
+    /* ----- タグで絞り込み ----- */
 
     items.forEach(item => {
 
+      const category = item.dataset.category;
+
       if (
         currentFilter === "all" ||
-        item.dataset.category === currentFilter
+        category === currentFilter
       ) {
-        item.style.display = "";
+        item.hidden = false;
       } else {
-        item.style.display = "none";
+        item.hidden = true;
       }
 
     });
@@ -172,16 +89,16 @@ title: Gallery
 
 
   /* =========================
-     並び順変更
+     並び順を変更
   ========================= */
 
   sortSelect.addEventListener("change", () => {
-    sortGallery();
+    updateGallery();
   });
 
 
   /* =========================
-     タグボタン
+     タグを変更
   ========================= */
 
   filterButtons.forEach(button => {
@@ -196,7 +113,7 @@ title: Gallery
 
       button.classList.add("active");
 
-      filterGallery();
+      updateGallery();
 
     });
 
@@ -207,8 +124,7 @@ title: Gallery
      最初の表示
   ========================= */
 
-  sortGallery();
-  filterGallery();
+  updateGallery();
 
 
   /* =========================
