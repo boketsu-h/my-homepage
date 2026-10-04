@@ -393,3 +393,338 @@ body {
   }
 
 }
+
+/* =========================
+   HOME HERO
+========================= */
+
+.home-hero {
+  position: relative;
+
+  width: 100%;
+  height: calc(100svh - 70px);
+  min-height: 560px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+}
+
+
+/* =========================
+   CHARACTER
+========================= */
+
+.hero-character-area {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: min(48vw, 650px);
+
+  transform: translate(-50%, -50%);
+
+  z-index: 2;
+}
+
+.hero-character {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/* =========================
+   DECORATION
+========================= */
+
+.hero-decoration {
+  position: absolute;
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+
+/* 左上の大きな円 */
+
+.hero-circle {
+  width: 230px;
+  height: 230px;
+
+  left: 8%;
+  top: 12%;
+
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+
+  opacity: 0.45;
+}
+
+
+/* 横線 */
+
+.hero-line {
+  width: 25vw;
+  height: 1px;
+
+  right: 7%;
+  top: 27%;
+
+  background: var(--accent);
+
+  opacity: 0.55;
+}
+
+
+/* 右下の四角 */
+
+.hero-square {
+  width: 110px;
+  height: 110px;
+
+  right: 11%;
+  bottom: 15%;
+
+  border: 1px solid var(--accent);
+
+  transform: rotate(12deg);
+
+  opacity: 0.35;
+}
+
+
+/* 小さい塗り円 */
+
+.hero-small-circle {
+  width: 14px;
+  height: 14px;
+
+  left: 18%;
+  bottom: 24%;
+
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+
+/* =========================
+   SMALL TEXT
+========================= */
+
+.hero-text {
+  position: absolute;
+
+  left: 6%;
+  bottom: 8%;
+
+  display: flex;
+  flex-direction: column;
+
+  color: var(--accent);
+
+  line-height: 1.3;
+
+  z-index: 3;
+}
+
+.hero-text span:first-child {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.hero-text span:last-child {
+  margin-top: 4px;
+
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+
+  opacity: 0.65;
+}
+
+
+/* =========================
+   SCROLL
+========================= */
+
+.hero-scroll {
+  position: absolute;
+
+  right: 5%;
+  bottom: 7%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  color: var(--subtext);
+
+  font-size: 9px;
+  letter-spacing: 0.18em;
+
+  text-decoration: none;
+
+  z-index: 3;
+}
+
+.hero-scroll span {
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 1;
+}
+
+
+/* =========================
+   HOME LINKS
+========================= */
+
+.home-links {
+  max-width: 1000px;
+
+  margin: 0 auto;
+  padding: 80px 30px 120px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 30px;
+}
+
+.home-links a {
+  position: relative;
+
+  padding: 25px 0;
+
+  color: var(--text);
+
+  border-top: 1px solid var(--border);
+
+  text-decoration: none;
+}
+
+.home-links a > span {
+  display: block;
+
+  margin-bottom: 20px;
+
+  color: var(--accent);
+
+  font-size: 10px;
+}
+
+.home-links strong {
+  display: block;
+
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.home-links small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--subtext);
+
+  font-size: 11px;
+}
+
+.home-links a:hover strong {
+  color: var(--accent);
+}
+
+
+/* =========================
+   HOME SMARTPHONE
+========================= */
+
+@media (max-width: 600px) {
+
+  .home-hero {
+    height: calc(100svh - 60px);
+    min-height: 500px;
+  }
+
+
+  /* キャラクター */
+
+  .hero-character-area {
+    width: min(88vw, 520px);
+
+    top: 47%;
+  }
+
+
+  /* 装飾 */
+
+  .hero-circle {
+    width: 130px;
+    height: 130px;
+
+    left: -35px;
+    top: 12%;
+  }
+
+  .hero-line {
+    width: 35vw;
+
+    right: 5%;
+    top: 18%;
+  }
+
+  .hero-square {
+    width: 70px;
+    height: 70px;
+
+    right: 7%;
+    bottom: 18%;
+  }
+
+  .hero-small-circle {
+    left: 10%;
+    bottom: 27%;
+  }
+
+
+  /* 左下文字 */
+
+  .hero-text {
+    left: 6%;
+    bottom: 6%;
+  }
+
+
+  /* SCROLL */
+
+  .hero-scroll {
+    right: 6%;
+    bottom: 5%;
+  }
+
+
+  /* 下のリンク */
+
+  .home-links {
+    padding: 60px 20px 90px;
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .home-links a {
+    padding: 20px 0;
+  }
+
+}
